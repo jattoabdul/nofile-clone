@@ -1,5 +1,6 @@
 class Upload < ApplicationRecord
   include Referenceable
+  include Rails.application.routes.url_helpers
 
   has_many_attached :files
 
@@ -11,6 +12,6 @@ class Upload < ApplicationRecord
   private
 
   def set_upload_share_link
-    self.link = 'http://amazon.com'
+    self.link = uploads_url(self, only_path: false, host: ENV.fetch('APPLICATION_HOST'))
   end
 end

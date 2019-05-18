@@ -1,5 +1,6 @@
 class UploadsController < ApplicationController
   before_action :set_upload, only: %i[show edit update destroy]
+  before_action :confirm_files_attached, only: %i[create]
 
   # GET /uploads
   # GET /uploads.json
@@ -15,6 +16,15 @@ class UploadsController < ApplicationController
   # GET /uploads/new
   def new
     @upload = Upload.new
+    @uploads = [].tap do |files|
+      Upload.with_attached_files
+        .where(user_id: current_or_guest_user.id)
+        .each do |upload|
+        upload.files.each do |file|
+          files << { file: file }
+        end
+      end
+    end
   end
 
   # GET /uploads/1/edit
@@ -24,39 +34,18 @@ class UploadsController < ApplicationController
   # POST /uploads
   # POST /uploads.json
   def create
-    # new_uploads = create_upload_params[:files].map do |file|
-    #   file[:user_id] = current_or_guest_user.id
-    #   file
-    # end
-    new_uploads = create_upload_params[:files]
-    new_uploads.each { |u_file| u_file[:user_id] = current_or_guest_user.id }
-    puts(new_uploads, 'create_upload_params[:files]::new_uploads')
+    new_uploads = create_upload_params
+    new_uploads[:user_id] = current_or_guest_user.id
 
     @upload = Upload.new(new_uploads)
 
-    respond_to do |format|
-      if @upload.save
-        format.html { redirect_to @upload, notice: 'Upload was successfully created.' }
-        format.json { render :show, status: :created, location: @upload }
-      else
-        format.html { render :new }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
-      end
+    if @upload.save
+      flash[:success] = 'File upload successful!'
+    else
+      flash[:danger] = 'An error occurred. Please try again!'
+      flash[:error] = @upload.errors.full_messages.to_sentence
     end
-  end
-
-  # PATCH/PUT /uploads/1
-  # PATCH/PUT /uploads/1.json
-  def update
-    respond_to do |format|
-      if @upload.update(upload_params)
-        format.html { redirect_to @upload, notice: 'Upload was successfully updated.' }
-        format.json { render :show, status: :ok, location: @upload }
-      else
-        format.html { render :edit }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to root_path
   end
 
   # DELETE /uploads/1
@@ -76,10 +65,16 @@ class UploadsController < ApplicationController
   end
 
   def upload_params
-    params.require(:upload).permit(:link, :reference, :archived, :user_id)
+    params.require(:upload).permit(:link, :archived)
   end
 
   def create_upload_params
-    params.require(:upload).permit(files: %i[file])
+    params.require(:upload).permit(files: [])
+  end
+
+  def confirm_files_attached
+    return if create_upload_params[:files].present?
+    redirect_to new_upload_path
+    flash[:warning] = 'No files attached for upload!'
   end
 end

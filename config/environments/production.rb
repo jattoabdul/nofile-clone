@@ -91,4 +91,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  
+  # Use aws for file storage in production
+  config.active_storage.service = :amazon
+  config.require_master_key = true
 end
