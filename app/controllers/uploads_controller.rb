@@ -1,5 +1,5 @@
 class UploadsController < ApplicationController
-  before_action :set_upload, only: %i[show edit update destroy]
+  before_action :set_upload, only: %i[show edit update]
   before_action :confirm_files_attached, only: %i[create]
 
   # GET /uploads
@@ -21,7 +21,7 @@ class UploadsController < ApplicationController
         .where(user_id: current_or_guest_user.id)
         .each do |upload|
         upload.files.each do |file|
-          files << { file: file }
+          files << { id: upload.id, file: file }
         end
       end
     end
@@ -51,11 +51,16 @@ class UploadsController < ApplicationController
   # DELETE /uploads/1
   # DELETE /uploads/1.json
   def destroy
-    @upload.destroy
-    respond_to do |format|
-      format.html { redirect_to uploads_url, notice: 'Upload was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @upload = @upload = Upload.find_by(id: params[:id], user_id: current_or_guest_user.id)
+    @file = ActiveStorage::Attachment.find(params[:file])
+    @file&.purge
+    @upload.destroy unless @upload.files.present?
+    flash[:success] = 'File deleted successful!'
+    redirect_to root_path
+  rescue StandardError => error
+    flash[:danger] = 'File does not exist!'
+    flash[:error] = error.message
+    redirect_to root_path
   end
 
   private
