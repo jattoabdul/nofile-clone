@@ -5,7 +5,15 @@ class UploadsController < ApplicationController
   # GET /uploads
   # GET /uploads.json
   def index
-    @uploads = Upload.where(user_id: current_or_guest_user.id)
+    @uploads = [].tap do |files|
+      Upload.with_attached_files
+            .where(user_id: current_or_guest_user.id)
+            .each do |upload|
+              upload.files.each do |file|
+                files << { id: upload.id, file: file }
+              end
+            end
+    end
   end
 
   # GET /uploads/1
@@ -18,12 +26,12 @@ class UploadsController < ApplicationController
     @upload = Upload.new
     @uploads = [].tap do |files|
       Upload.with_attached_files
-        .where(user_id: current_or_guest_user.id)
-        .each do |upload|
-        upload.files.each do |file|
-          files << { id: upload.id, file: file }
-        end
-      end
+            .where(user_id: current_or_guest_user.id)
+            .each do |upload|
+              upload.files.each do |file|
+                files << { id: upload.id, file: file }
+              end
+            end
     end
   end
 

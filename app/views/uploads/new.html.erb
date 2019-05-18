@@ -8,10 +8,13 @@
   <% @uploads.each do |upload| %>
     <div>
       <span class="uploaded_file_name">
-        <%= link_to upload[:file].filename, rails_blob_path(upload[:file], disposition: 'attachment'), class: "icon ion-ios-cloud-download" %>
+        <%= upload[:file].filename %>
       </span>
       <span class="file_created_at"><%= upload[:file].created_at.strftime("%b %d, %Y") %></span>
-      <span><%= link_to "delete", upload_path(id: upload[:id], file: upload[:file]), method: :delete, class: "icon ion-ios-trash" %></span>
+      <span class="delete_file"><%= link_to "Delete", upload_path(id: upload[:id], file: upload[:file]), method: :delete, class: "icon ion-ios-trash" %></span>
+      <span class="download_file">
+          <%= link_to 'Download File', rails_blob_path(upload[:file], disposition: 'attachment'), class: "icon ion-ios-cloud-download" %>
+      </span>
     </div>
   <% end %>
 </div>
