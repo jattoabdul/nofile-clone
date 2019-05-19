@@ -48,10 +48,10 @@ class UploadsController < ApplicationController
     @upload = Upload.new(new_uploads)
 
     if @upload.save
-      flash[:success] = 'File upload successful!'
+      flash[:success] = 'File Upload Successfully!'
     else
       flash[:danger] = 'An error occurred. Please try again!'
-      flash[:error] = @upload.errors.full_messages.to_sentence
+      flash[:error] = t(@upload.errors.full_messages.to_sentence)
     end
     redirect_to root_path
   end
@@ -63,10 +63,10 @@ class UploadsController < ApplicationController
     @file = ActiveStorage::Attachment.find(params[:file])
     @file&.purge
     @upload.destroy unless @upload.files.present?
-    flash[:success] = 'File deleted successful!'
+    flash[:success] = 'File Deleted Successful!'
     redirect_to root_path
   rescue StandardError => error
-    flash[:danger] = 'File does not exist!'
+    flash[:danger] = 'File Does Not Exist!'
     flash[:error] = error.message
     redirect_to root_path
   end
@@ -88,6 +88,6 @@ class UploadsController < ApplicationController
   def confirm_files_attached
     return if create_upload_params[:files].present?
     redirect_to new_upload_path
-    flash[:warning] = 'No files attached for upload!'
+    flash[:warning] = 'No Files Attached For Upload!'
   end
 end

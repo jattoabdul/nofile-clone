@@ -1,11 +1,4 @@
 <%= form_with(model: upload, local: true) do |form| %>
-  <% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>">
-    <button class="close" data-dismiss="alert">×</button>
-    <%= value %>
-  </div>
-  <% end %>
-
   <div class="field">
     <%= form.file_field :files, multiple: true, direct_upload: true, required: true %>
     <%= form.label :files, '', class: 'icon ion-ios-cloud-upload' do %>

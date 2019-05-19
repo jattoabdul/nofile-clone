@@ -1,5 +1,7 @@
 {
   "name": "nofile",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "toastr": "^2.1.4"
+  }
 }

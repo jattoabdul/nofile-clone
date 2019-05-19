@@ -6,7 +6,7 @@
 <div>
   <h3>Uploaded Files</h3>
   <% @uploads.each do |upload| %>
-    <div>
+    <div class="upload_file_item">
       <span class="uploaded_file_name">
         <%= upload[:file].filename %>
       </span>

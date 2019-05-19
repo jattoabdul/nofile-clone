@@ -26,7 +26,7 @@ addEventListener("direct-upload:initialize", event => {
   const selectedFiles = document.querySelector("#selected-files");
   const { target, detail } = event
   const { id, file } = detail
-  target.insertAdjacentHTML("beforebegin", `<span>File Uploading</span>`)
+  // target.insertAdjacentHTML("beforebegin", `<span>File Uploading</span>`)
   selectedFiles.appendChild(`
         <div id="direct-upload-${id}" class="direct-upload direct-upload--pending">
           <div id="direct-upload-progress-${id}" class="direct-upload__progress" style="width: 0%"></div>
