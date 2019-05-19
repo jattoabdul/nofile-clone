@@ -23,6 +23,7 @@ Rails.application.configure do
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
 
   # Compress JavaScripts and CSS.
+  # TODO: if it Doesn't work, comment it out or remove this line
   config.assets.js_compressor = :uglifier
   # config.assets.css_compressor = :sass
 
@@ -91,4 +92,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Use aws for file storage in production
+  config.active_storage.service = :amazon
+  config.require_master_key = true
 end

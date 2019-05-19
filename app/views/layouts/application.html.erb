@@ -10,8 +10,14 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% unless flash.empty? %>
+      <% flash.each do |f| %>
+        <% type = f[0].to_s %>
+        <% message = f[1].to_s %>
+        <%= flash_toastr %>
+      <% end %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

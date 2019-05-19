@@ -2,4 +2,26 @@
 
 <%= render 'form', upload: @upload %>
 
-<%= link_to 'Back', uploads_path %>
+<% unless @uploads.empty? %>
+<div>
+  <h3>Uploaded Files</h3>
+  <% @uploads.each do |upload| %>
+    <div class="upload_file_item">
+      <span class="uploaded_file_name">
+        <%= upload[:file].filename %>
+      </span>
+      <span class="file_created_at"><%= upload[:file].created_at.strftime("%b %d, %Y") %></span>
+      <span class="delete_file"><%= link_to "Delete", upload_path(id: upload[:id], file: upload[:file]), method: :delete, class: "icon ion-ios-trash" %></span>
+      <span class="download_file">
+          <%= link_to 'Download File', rails_blob_path(upload[:file], disposition: 'attachment'), class: "icon ion-ios-cloud-download" %>
+      </span>
+    </div>
+  <% end %>
+</div>
+<% else %>
+  <h3 class="no-files">No uploaded files</h3>
+<% end %>
+
+<br>
+
+<%= link_to 'View All Uploads', uploads_path %>
