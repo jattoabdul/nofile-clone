@@ -10,14 +10,17 @@
   </head>
 
   <body>
-    <% unless flash.empty? %>
-      <% flash.each do |f| %>
-        <% type = f[0].to_s %>
-        <% message = f[1].to_s %>
-        <%= flash_toastr %>
+    <%= render partial: 'shared/navbar' %>
+    <div class="container">
+      <% unless flash.empty? %>
+        <% flash.each do |f| %>
+          <% type = f[0].to_s %>
+          <% message = f[1].to_s %>
+          <%= flash_toastr %>
+        <% end %>
       <% end %>
-    <% end %>
-
-    <%= yield %>
+  
+      <%= yield %>
+    </div>
   </body>
 </html>

@@ -1,0 +1,14 @@
+<nav class="navbar">
+  <%= link_to 'NoFile.ng', root_path, class: 'navbar-brand' %>
+
+  <ul class="navbar-links">
+    <li class="navbar-item">
+      <%= link_to 'New Upload', new_upload_path %>
+    </li>
+    <li class="navbar-item">
+      <%= link_to 'View All Uploads', uploads_path %>
+    </li>
+  </ul>
+
+  <%= link_to 'Contact Me', root_path, class: 'navbar-action-call' %>
+</nav>
