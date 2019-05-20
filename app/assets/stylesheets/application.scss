@@ -13,5 +13,7 @@
  *= require_tree .
  *= require_self
  *= require toastr
+ *= require toastr.min
  */
-*= require toastr.min
+@import "bootstrap";
+@import "toastr.min";

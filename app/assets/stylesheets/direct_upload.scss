@@ -3,7 +3,7 @@
   position: relative;
   padding: 2px 4px;
   margin: 0 3px 3px 0;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 1px solid rgb(255, 255, 255);
   border-radius: 3px;
   font-size: 11px;
   line-height: 13px;
@@ -18,8 +18,9 @@
   top: 0;
   left: 0;
   bottom: 0;
-  opacity: 0.2;
-  background: #0076ff;
+  opacity: 0.4;
+  background: #43baea;
+  color: white;
   transition: width 120ms ease-out, opacity 60ms 60ms ease-in;
   transform: translate3d(0, 0, 0);
 }

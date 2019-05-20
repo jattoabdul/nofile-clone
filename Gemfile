@@ -79,6 +79,9 @@ group :test do
 end
 
 gem 'aws-sdk-s3', require: false
+gem 'bootstrap', '~> 4.3.1'
+gem 'clipboard-rails'
+gem 'shortener'
 # gem 'toastr-rails'
 gem 'toastrjs-rails'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

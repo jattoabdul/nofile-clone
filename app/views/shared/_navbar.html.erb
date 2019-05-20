@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <div class="container">
+    <%= link_to 'NoFile.ng', root_path, class: 'navbar-brand' %>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarsExample03">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item <%= 'active' if current_page?(root_path) %>">
+          <%= link_to root_path, class: 'nav-link' do %>
+            New Upload
+            <span class="sr-only">(current)</span>
+          <% end %>
+        </li>
+        <li class="nav-item <%= 'active' if current_page?(uploads_path) %>">
+          <%= link_to 'View All Uploads', uploads_path, class: 'nav-link' %>
+        </li>
+      </ul>
+      <%= link_to 'Contribute', 'https://github.com/jattoabdul/nofile-clone', class: 'navbar-action-call my-2 my-md-0' %>
+    </div>
+  </div>
+</nav>
