@@ -1,0 +1,35 @@
+<div class="all-uploads-container">
+  <section class="header-section" id="header-section">
+    <div class="container all-uploads-wrapper">
+      <% unless @uploads.empty? %>
+        <div class="all-uploads">
+          <h3>All Uploaded Files</h3>
+          <% @uploads.each do |upload| %>
+            <div class="upload_file_item">
+              <div class="top">
+                <p class="file_description_action">
+                  <span><i class='icon ion-ios-document'></i> <%= upload[:file].filename %></span> | 
+                  <span><%= link_to "Delete", upload_path(id: upload[:id], file: upload[:file]), method: :delete, class: "icon ion-ios-trash" %></span>
+                  <span class="completed"><i class='icon ion-ios-cloud-done'></i> Completed</span>
+                </p>
+              </div>
+              <div class="bottom">
+                <p class="file_link" id="file_link">
+                    <%= short_url(rails_blob_url(upload[:file])) %>
+                </p>
+                <p class="file_action copy_link" data-clipboard-action="copy" data-clipboard-target="#file_link">
+                  <i class='icon ion-ios-copy'></i>
+                </p>
+                <p class="file_action download">
+                  <%= link_to '', rails_blob_path(upload[:file], disposition: 'attachment'), class: "icon ion-ios-cloud-download" %>
+                </p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <h3 class="no-files">No uploaded files</h3>
+      <% end %>
+    </div>
+  </section>
+</div>

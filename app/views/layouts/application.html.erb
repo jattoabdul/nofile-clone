@@ -4,12 +4,26 @@
     <title>Nofile</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#285b8e" />
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://unpkg.com/ionicons@4.4.7/dist/css/ionicons.min.css', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <%= render partial: 'shared/navbar' %>
+    <% unless flash.empty? %>
+      <% flash.each do |f| %>
+        <% type = f[0].to_s %>
+        <% message = f[1].to_s %>
+        <%= flash_toastr %>
+      <% end %>
+    <% end %>
+
     <%= yield %>
+    <%= render partial: 'shared/footer' %>
   </body>
 </html>

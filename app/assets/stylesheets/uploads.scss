@@ -1,0 +1,152 @@
+// Place all the styles related to the Uploads controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#upload_files {
+  // height: 0.1px;
+  // width: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+
+  + label {
+    cursor: pointer;
+
+    span {
+      display: block;
+      font-size: 1rem;
+    }
+  }
+}
+
+#header-section {
+  background: #285b8e;
+  min-height: calc(100vh - 4rem);
+  padding-bottom: 6rem;
+}
+
+.new-upload-wrapper {
+  padding-top: 8rem;
+}
+
+.all-uploads-wrapper {
+  padding-top: 2rem;
+  color: white;
+}
+
+.upload-form {
+  background: #052a4fab;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  position: relative;
+  height: 30vh;
+}
+
+.actions {
+  position: absolute;
+  bottom: -1.7rem;
+  left: 20vw;
+  display: flex;
+  height: 1.7rem;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  background: #29abe0;
+  border-radius: 0px 0px 50px 50px;
+
+  .upload-btn {
+    color: white;
+    width: 100%;
+    outline: none;
+
+    &:focus {
+      color: white;
+      outline: none;
+      box-shadow: none;
+    }
+
+    &:hover {
+      color: #0a1929;
+      font-weight: bold;
+    }
+  }
+}
+
+.uploaded-files {
+  margin-top: 3rem;
+  color: white;
+}
+
+#selected-files {
+  display: flex;
+  flex-direction: column;
+}
+
+.no-files {
+  color: white;
+  font-size: 2vw;
+}
+
+.upload_file_item {
+  margin-bottom: 1.5rem;
+}
+
+.completed {
+  float: right;
+}
+
+.top {
+  margin-bottom: .5rem;
+  .file_description_action {
+    margin-bottom: 0;
+
+    span a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .ion-ios-trash:before {
+      content: "\f4c5";
+      padding-right: 0.2rem;
+    }
+  }
+}
+
+.bottom {
+  display: flex;
+  border: 1px solid #29abe0;
+  .file_link {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-basis: 90%;
+    margin-bottom: 0;
+    padding-left: 1rem;
+  }
+  .file_action {
+    border-left: 1.5px solid #29abe0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+    cursor: pointer;
+
+    &.copy_link {
+      flex-basis: 5%;
+      padding: .5rem;
+    }
+    &.download {
+      flex-basis: 5%;
+      padding: .5rem;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  }
+}
