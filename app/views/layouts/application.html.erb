@@ -5,22 +5,22 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'https://unpkg.com/ionicons@4.4.7/dist/css/ionicons.min.css', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <%= render partial: 'shared/navbar' %>
-    <div class="container">
-      <% unless flash.empty? %>
-        <% flash.each do |f| %>
-          <% type = f[0].to_s %>
-          <% message = f[1].to_s %>
-          <%= flash_toastr %>
-        <% end %>
+    <% unless flash.empty? %>
+      <% flash.each do |f| %>
+        <% type = f[0].to_s %>
+        <% message = f[1].to_s %>
+        <%= flash_toastr %>
       <% end %>
-  
-      <%= yield %>
-    </div>
+    <% end %>
+
+    <%= yield %>
+    <%= render partial: 'shared/footer' %>
   </body>
 </html>

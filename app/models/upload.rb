@@ -19,6 +19,16 @@ class Upload < ApplicationRecord
   def sanitize_list
     return if files.size < 2
 
+    # get all uploads with files for current user
+    Upload.with_attached_files
+          .where(user_id: user.id)
+          .each do |upload|
+            upload.files.each do |file|
+              # add them to the current list of file to be uploaded
+              files << file
+            end
+          end
+
     file_set = {}
 
     files.each do |file|

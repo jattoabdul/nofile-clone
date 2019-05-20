@@ -18,6 +18,7 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require clipboard
 //= require rails-ujs
 //= require toastr.min
 //= require activestorage
@@ -39,4 +40,35 @@ $(document).ready(function() {
       "showMethod": "fadeIn",
       "hideMethod": "fadeOut"
   }
+
+  // Clipboard Setup
+  $('.copy_link').tooltip({
+    trigger: 'click',
+    placement: 'bottom'
+  });
+  
+  function setTooltip(btn, message) {
+    $(btn).tooltip('show')
+      .attr('data-original-title', message)
+      .tooltip('show');
+  }
+  
+  function hideTooltip(btn) {
+    setTimeout(function() {
+      $(btn).tooltip('hide');
+    }, 1000);
+  }
+  
+  // Clipboard Instance
+  var clipboard = new Clipboard('.copy_link');
+  
+  clipboard.on('success', function(e) {
+    setTooltip(e.trigger, 'Copied!');
+    hideTooltip(e.trigger);
+  });
+  
+  clipboard.on('error', function(e) {
+    setTooltip(e.trigger, 'Failed!');
+    hideTooltip(e.trigger);
+  });
 });
