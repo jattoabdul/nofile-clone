@@ -1,4 +1,4 @@
-<%= form_with model: upload, local: true, class: 'upload-form' do |form| %>
+<%= form_with model: upload, class: 'upload-form' do |form| %>
   <div class="form-container">
     <div class="field">
       <%= form.file_field :files, multiple: true, direct_upload: true, required: true %>
